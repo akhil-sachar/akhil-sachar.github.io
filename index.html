@@ -2,23 +2,913 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23171717'/%3E%3Ctext x='50' y='61' text-anchor='middle' font-size='36' font-family='Arial' font-weight='700' fill='%23b5d33d'%3EAS%3C/text%3E%3C/svg%3E" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Portfolio for Akhil Sachar, a Data Scientist and AI/ML Engineer focused on analytics, machine learning, generative AI, and agentic workflows."
+      content="Portfolio for Akhil Sachar, a Data Scientist and AI/ML Engineer focused on analytics, machine learning, generative AI, and data science."
     />
     <title>Akhil Sachar | Data Scientist and AI/ML Engineer</title>
     <style>
+      :root {
+        color: #141414;
+        background: #f5f1e8;
+        font-family: "Segoe UI", Arial, sans-serif;
+        font-synthesis: none;
+        text-rendering: geometricPrecision;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
-        background-color: #f5f1e8;
+        min-width: 320px;
+        min-height: 100vh;
         margin: 0;
+        background: #f5f1e8;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .portfolio-shell {
+        min-height: 100vh;
+        background: #f5f1e8;
+        color: #161616;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 88vh;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding: 24px 56px 54px;
+        background: #181818;
+        color: #fffaf0;
+      }
+
+      .hero-image,
+      .hero-shade {
+        position: absolute;
+        inset: 0;
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-shade {
+        background:
+          linear-gradient(90deg, rgba(12, 12, 12, 0.9) 0%, rgba(12, 12, 12, 0.72) 38%, rgba(12, 12, 12, 0.28) 100%),
+          linear-gradient(180deg, rgba(12, 12, 12, 0.36) 0%, rgba(12, 12, 12, 0.18) 45%, rgba(12, 12, 12, 0.75) 100%);
+      }
+
+      .site-nav {
+        position: absolute;
+        top: 22px;
+        left: 56px;
+        right: 56px;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand-lockup,
+      .nav-links,
+      .hero-actions,
+      .contact-links {
+        display: flex;
+        align-items: center;
+      }
+
+      .brand-lockup {
+        gap: 10px;
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        display: inline-flex;
+        width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 250, 240, 0.46);
+        border-radius: 50%;
+        background: rgba(255, 250, 240, 0.12);
+      }
+
+      .nav-links {
+        gap: 8px;
+        padding: 6px;
+        border: 1px solid rgba(255, 250, 240, 0.24);
+        border-radius: 8px;
+        background: rgba(15, 15, 15, 0.42);
+        backdrop-filter: blur(12px);
+      }
+
+      .nav-links a {
+        min-height: 36px;
+        padding: 9px 12px;
+        border-radius: 6px;
+        color: #fffaf0;
+        font-size: 0.9rem;
+        transition: background 160ms ease, color 160ms ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        background: #fffaf0;
+        color: #111;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        width: min(760px, 100%);
+      }
+
+      .eyebrow,
+      .section-kicker {
+        margin: 0 0 14px;
+        color: #13a89e;
+        font-size: 0.92rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        margin: 0;
+        color: #fffaf0;
+        font-size: 5rem;
+        line-height: 0.96;
+        letter-spacing: 0;
+      }
+
+      .hero-summary {
+        max-width: 660px;
+        margin: 24px 0 0;
+        color: rgba(255, 250, 240, 0.88);
+        font-size: 1.3rem;
+        line-height: 1.55;
+      }
+
+      .hero-actions {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .hero-actions a,
+      .project-link,
+      .contact-links a {
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        font-weight: 800;
+      }
+
+      .hero-actions a {
+        border: 1px solid rgba(255, 250, 240, 0.4);
+        padding: 10px 16px;
+        background: rgba(255, 250, 240, 0.12);
+        color: #fffaf0;
+        transition: transform 160ms ease, background 160ms ease;
+      }
+
+      .hero-actions a:first-child {
+        border-color: #b5d33d;
+        background: #b5d33d;
+        color: #111;
+      }
+
+      .hero-actions a:hover,
+      .hero-actions a:focus-visible {
+        transform: translateY(-2px);
+        background: #fffaf0;
+        color: #111;
+      }
+
+      .stat-strip {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(120px, 1fr));
+        gap: 10px;
+        max-width: 720px;
+        margin-top: 36px;
+      }
+
+      .stat-item {
+        min-height: 92px;
+        padding: 16px;
+        border-top: 2px solid rgba(255, 250, 240, 0.38);
+        background: rgba(17, 17, 17, 0.36);
+      }
+
+      .stat-item strong {
+        display: block;
+        color: #ef626c;
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .stat-item span {
+        display: block;
+        margin-top: 8px;
+        color: rgba(255, 250, 240, 0.76);
+        font-size: 0.84rem;
+        line-height: 1.35;
+      }
+
+      .section-shell {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      .intro-band,
+      .experience-band,
+      .education-band {
+        background: #f5f1e8;
+        padding: 84px 0;
+      }
+
+      .intro-grid,
+      .experience-grid,
+      .education-grid,
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 72px;
+        align-items: start;
+      }
+
+      .section-kicker {
+        color: #bf3f48;
+      }
+
+      h2 {
+        margin: 0;
+        color: #171717;
+        font-size: 2.65rem;
+        line-height: 1.08;
+        letter-spacing: 0;
+      }
+
+      .intro-copy p,
+      .section-heading p,
+      .timeline-points li,
+      .education-highlights li,
+      .project-card p {
+        color: #4b463b;
+        font-size: 1rem;
+        line-height: 1.65;
+      }
+
+      .intro-copy p {
+        margin: 0 0 18px;
+        font-size: 1.06rem;
+      }
+
+      .timeline,
+      .education-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .education-band,
+      .skills-band {
+        background: #eee6d7;
+      }
+
+      .timeline-item,
+      .education-card {
+        padding: 22px;
+        border-left: 4px solid #13a89e;
+        border-radius: 8px;
+        background: #fffaf0;
+        box-shadow: 0 18px 45px rgba(22, 22, 22, 0.07);
+      }
+
+      .timeline-item:nth-child(2) {
+        border-left-color: #ef626c;
+      }
+
+      .education-card {
+        padding: 26px;
+        border: 1px solid #d7c8ae;
+        border-top: 4px solid #b5d33d;
+      }
+
+      .timeline-item span,
+      .education-meta {
+        color: #8b3b40;
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .education-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 18px;
+      }
+
+      .timeline-item h3,
+      .education-card h3,
+      .skill-panel h3,
+      .project-card h3 {
+        margin: 18px 0 10px;
+        font-size: 1.32rem;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      .timeline-item h3,
+      .education-card h3,
+      .skill-panel h3 {
+        color: #171717;
+      }
+
+      .company {
+        margin: 0 0 8px;
+        color: #151515;
+        font-weight: 800;
+      }
+
+      .timeline-points,
+      .education-highlights {
+        display: grid;
+        gap: 10px;
+        margin: 14px 0 0;
         padding: 0;
+        list-style: none;
+      }
+
+      .timeline-points li,
+      .education-highlights li {
+        position: relative;
+        padding-left: 18px;
+      }
+
+      .timeline-points li::before,
+      .education-highlights li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.72em;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #13a89e;
+      }
+
+      .timeline-item:nth-child(2) .timeline-points li::before,
+      .education-highlights li::before {
+        background: #ef626c;
+      }
+
+      .skills-band {
+        padding: 84px 0;
+      }
+
+      .skill-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 16px;
+      }
+
+      .skill-panel {
+        min-height: 232px;
+        padding: 22px;
+        border: 1px solid #ddd1bd;
+        border-radius: 8px;
+        background: #f9f5ec;
+      }
+
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: auto;
+      }
+
+      .skill-panel .tag-list {
+        margin-top: 18px;
+      }
+
+      .tag-list span {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        border: 1px solid rgba(255, 250, 240, 0.18);
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: rgba(255, 250, 240, 0.82);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .skill-panel .tag-list span {
+        border-color: #d7c8ae;
+        color: #3c372e;
+        background: #fffaf0;
+      }
+
+      .projects-band {
+        background: #171717;
+        padding: 86px 0 92px;
+        color: #fffaf0;
+      }
+
+      .section-heading {
+        max-width: 760px;
+        margin-bottom: 34px;
+      }
+
+      .section-heading h2,
+      .projects-band h2,
+      .contact-band h2 {
+        color: #fffaf0;
+      }
+
+      .section-heading p {
+        margin: 16px 0 0;
+        color: rgba(255, 250, 240, 0.68);
+      }
+
+      .section-heading .section-kicker {
+        margin-top: 0;
+        color: #bf3f48;
+      }
+
+      .projects-band .section-heading .section-kicker {
+        color: #b5d33d;
+      }
+
+      .section-heading.compact h2 {
+        color: #171717;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+      }
+
+      .project-card {
+        min-height: 392px;
+        display: flex;
+        flex-direction: column;
+        padding: 22px;
+        border: 1px solid rgba(255, 250, 240, 0.16);
+        border-radius: 8px;
+        background: #22211f;
+      }
+
+      .project-card:nth-child(3n + 1) {
+        border-top: 4px solid #13a89e;
+      }
+
+      .project-card:nth-child(3n + 2) {
+        border-top: 4px solid #ef626c;
+      }
+
+      .project-card:nth-child(3n) {
+        border-top: 4px solid #b5d33d;
+      }
+
+      .project-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: #b5d33d;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .project-card h3 {
+        color: #fffaf0;
+      }
+
+      .project-card p {
+        margin: 0 0 14px;
+        color: rgba(255, 250, 240, 0.74);
+      }
+
+      .project-card .project-impact {
+        color: rgba(255, 250, 240, 0.88);
+        font-weight: 650;
+      }
+
+      .project-link {
+        width: fit-content;
+        margin-top: 18px;
+        border: 1px solid #fffaf0;
+        padding: 9px 13px;
+        color: #fffaf0;
+        font-size: 0.9rem;
+      }
+
+      .contact-band {
+        padding: 74px 0;
+        background: #111;
+        color: #fffaf0;
+      }
+
+      .contact-grid {
+        align-items: center;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .contact-links a,
+      .contact-links span {
+        border: 1px solid rgba(255, 250, 240, 0.18);
+        border-radius: 8px;
+        padding: 14px 16px;
+        color: rgba(255, 250, 240, 0.88);
+        overflow-wrap: anywhere;
+      }
+
+      .contact-links a:hover,
+      .contact-links a:focus-visible {
+        border-color: #b5d33d;
+        color: #b5d33d;
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          min-height: 90vh;
+          padding: 22px 22px 42px;
+        }
+
+        .site-nav {
+          left: 22px;
+          right: 22px;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          width: 100%;
+          overflow-x: auto;
+          justify-content: flex-start;
+        }
+
+        .hero-content {
+          padding-top: 136px;
+        }
+
+        .hero h1 {
+          font-size: 3.25rem;
+        }
+
+        .hero-summary {
+          font-size: 1.08rem;
+        }
+
+        .stat-strip,
+        .intro-grid,
+        .experience-grid,
+        .education-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 22px;
+        }
+
+        h2 {
+          font-size: 2.1rem;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .hero h1 {
+          font-size: 2.75rem;
+        }
+
+        .stat-strip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .hero-actions a {
+          flex: 1 1 calc(50% - 10px);
+        }
+
+        .project-card {
+          min-height: auto;
+        }
       }
     </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="portfolio-shell">
+      <section class="hero" id="top" aria-label="Akhil Sachar portfolio">
+        <img
+          class="hero-image"
+          src="./portfolio-hero.png"
+          alt="Abstract data science workspace with analytics charts and AI workflow visuals"
+        />
+        <div class="hero-shade"></div>
+
+        <nav class="site-nav" aria-label="Primary navigation">
+          <a class="brand-lockup" href="#top" aria-label="Akhil Sachar home">
+            <span class="brand-mark">AS</span>
+            <span>Akhil Sachar</span>
+          </a>
+          <div class="nav-links">
+            <a href="#experience">Experience</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+
+        <div class="hero-content">
+          <p class="eyebrow">Data Scientist and AI/ML Engineer</p>
+          <h1>Akhil Sachar</h1>
+          <p class="hero-summary">
+            I build analytics systems, machine learning workflows, and AI agents
+            that turn complex data into decisions people can trust.
+          </p>
+          <div class="hero-actions" aria-label="Contact actions">
+            <a href="mailto:asachar@horizon.csueastbay.edu">Email</a>
+            <a href="https://linkedin.com/in/akhil-sachar" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a href="https://github.com/akhil-sachar" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="./Akhil-Sachar-Resume.pdf" download>Resume</a>
+          </div>
+          <div class="stat-strip" aria-label="Career highlights">
+            <div class="stat-item"><strong>7+</strong><span>Years in data and AI</span></div>
+            <div class="stat-item"><strong>4.0</strong><span>MS Statistics GPA</span></div>
+            <div class="stat-item"><strong>40%</strong><span>Training speed gain</span></div>
+            <div class="stat-item"><strong>30%</strong><span>Memory reduction</span></div>
+          </div>
+        </div>
+      </section>
+
+      <main>
+        <section class="intro-band" aria-labelledby="about-heading">
+          <div class="section-shell intro-grid">
+            <div>
+              <p class="section-kicker">About</p>
+              <h2 id="about-heading">Data science, AI, and analytics work.</h2>
+            </div>
+            <div class="intro-copy">
+              <p>
+                I have 7+ years of experience across data analysis, machine
+                learning, analytics automation, and generative AI. My work spans
+                SQL-heavy business intelligence, statistical experimentation,
+                feature pipelines, NLP extraction, RAG systems, and agentic
+                applications.
+              </p>
+              <p>
+                I am currently an MS Statistics candidate in Data Science at
+                California State University, East Bay, where I combine rigorous
+                statistical thinking with practical AI engineering.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="experience-band" id="experience" aria-labelledby="experience-heading">
+          <div class="section-shell experience-grid">
+            <div>
+              <p class="section-kicker">Experience</p>
+              <h2 id="experience-heading">Experience</h2>
+            </div>
+            <div class="timeline">
+              <article class="timeline-item">
+                <span>Apr. 2022 - Aug. 2024</span>
+                <h3>AI/ML Engineer</h3>
+                <p class="company">Techchefz</p>
+                <ul class="timeline-points">
+                  <li>Designed analytics, ETL, feature-engineering, and machine learning pipelines across multi-source datasets.</li>
+                  <li>Built NLP extraction and RAG applications with spaCy, LangChain, LLMs, and retrieval evaluation workflows.</li>
+                  <li>Improved training workflows by reducing model training time by 40% and memory utilization by 30%.</li>
+                </ul>
+              </article>
+
+              <article class="timeline-item">
+                <span>Sep. 2017 - Mar. 2022</span>
+                <h3>Business Analyst</h3>
+                <p class="company">Swastik Wood Products</p>
+                <ul class="timeline-points">
+                  <li>Developed sales, expense, productivity, and revenue dashboards for recurring KPI reporting.</li>
+                  <li>Built forecasting models and regression analyses to identify business drivers and predict sales performance.</li>
+                  <li>Analyzed operational expenses and surfaced cost-saving opportunities through data-backed recommendations.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="education-band" id="education" aria-labelledby="education-heading">
+          <div class="section-shell education-grid">
+            <div>
+              <p class="section-kicker">Education</p>
+              <h2 id="education-heading">Education</h2>
+            </div>
+            <div class="education-list">
+              <article class="education-card">
+                <div class="education-meta">
+                  <span>Aug. 2024 - May 2026</span>
+                  <span>Hayward, CA</span>
+                </div>
+                <h3>Master of Science in Statistics, Data Science</h3>
+                <p class="company">California State University, East Bay</p>
+                <ul class="education-highlights">
+                  <li>Current graduate candidate with a 4.0 GPA.</li>
+                  <li>Coursework and applied focus in statistical modeling, data science, experimentation, and predictive analytics.</li>
+                  <li>Combines advanced statistical training with hands-on AI, analytics, and machine learning engineering.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="skills-band" id="skills" aria-labelledby="skills-heading">
+          <div class="section-shell">
+            <div class="section-heading compact">
+              <p class="section-kicker">Skills</p>
+              <h2 id="skills-heading">Skills</h2>
+            </div>
+            <div class="skill-grid">
+              <article class="skill-panel">
+                <h3>Data Science</h3>
+                <div class="tag-list">
+                  <span>Statistical inference</span>
+                  <span>Hypothesis testing</span>
+                  <span>Experimental design</span>
+                  <span>Forecasting</span>
+                  <span>Predictive analytics</span>
+                  <span>Regression analysis</span>
+                </div>
+              </article>
+              <article class="skill-panel">
+                <h3>Machine Learning</h3>
+                <div class="tag-list">
+                  <span>Classification</span>
+                  <span>Random forests</span>
+                  <span>Gradient boosting</span>
+                  <span>SVM</span>
+                  <span>Feature engineering</span>
+                  <span>Model evaluation</span>
+                </div>
+              </article>
+              <article class="skill-panel">
+                <h3>Generative AI</h3>
+                <div class="tag-list">
+                  <span>LLMs</span>
+                  <span>RAG</span>
+                  <span>AI agents</span>
+                  <span>Semantic retrieval</span>
+                  <span>Prompt engineering</span>
+                  <span>Question answering</span>
+                </div>
+              </article>
+              <article class="skill-panel">
+                <h3>Engineering</h3>
+                <div class="tag-list">
+                  <span>Python</span>
+                  <span>SQL</span>
+                  <span>R</span>
+                  <span>FastAPI</span>
+                  <span>Docker</span>
+                  <span>AWS</span>
+                  <span>Azure</span>
+                  <span>Airflow</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="projects-band" id="projects" aria-labelledby="projects-heading">
+          <div class="section-shell">
+            <div class="section-heading">
+              <p class="section-kicker">Projects</p>
+              <h2 id="projects-heading">Projects</h2>
+              <p>Selected projects from professional work, hackathons, and data science practice.</p>
+            </div>
+
+            <div class="project-grid">
+              <article class="project-card">
+                <div class="project-meta"><span>Hackathon AI Agents</span><span>2026</span></div>
+                <h3>EmailSignal</h3>
+                <p>Multi-agent decision intelligence platform that turns email activity into prioritized actions, hypotheses, and synthesized recommendations.</p>
+                <p class="project-impact">Recognized as Best Team Using CopilotKit at WeaveHacks 4 for agentic workflow automation and intelligent decision support.</p>
+                <div class="tag-list"><span>OpenAI Agents SDK</span><span>CopilotKit</span><span>Redis</span><span>W&amp;B Weave</span><span>React</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>Hackathon Winner</span><span>2026</span></div>
+                <h3>Solvit</h3>
+                <p>Real-time AI whiteboard that interprets hand-drawn mathematical expressions and generates step-by-step symbolic solutions.</p>
+                <p class="project-impact">Won Best UI/UX at HackHayward by combining a fast React canvas experience with AI-assisted math reasoning.</p>
+                <div class="tag-list"><span>FastAPI</span><span>React</span><span>TypeScript</span><span>Groq API</span><span>SymPy</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>Generative AI</span><span>2024</span></div>
+                <h3>Human Resources Chatbot</h3>
+                <p>RAG-powered HR assistant that answers policy and organizational questions from proprietary knowledge sources.</p>
+                <p class="project-impact">Added retrieval evaluation, hallucination checks, memory, and dynamic prompt orchestration for dependable employee support workflows.</p>
+                <div class="tag-list"><span>Python</span><span>FastAPI</span><span>LangChain</span><span>Docker</span><span>Bitbucket</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>AI Operations</span><span>2026</span></div>
+                <h3>SOC Multi-Agent Security Analyst</h3>
+                <p>Agent-driven security operations dashboard that triages alerts, routes investigations, and presents analyst-ready findings.</p>
+                <p class="project-impact">Shows how agentic AI can compress noisy event streams into reviewable decisions for high-pressure operational teams.</p>
+                <div class="tag-list"><span>LangGraph</span><span>FastAPI</span><span>React</span><span>TypeScript</span><span>CopilotKit</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>Predictive Analytics</span><span>2022</span></div>
+                <h3>Sales Forecasting Intelligence</h3>
+                <p>Forecasting and regression analysis workflow for identifying business drivers and projecting sales performance.</p>
+                <p class="project-impact">Helped stakeholders make data-backed planning decisions across revenue, productivity, and operational spend.</p>
+                <div class="tag-list"><span>Python</span><span>SQL</span><span>Regression</span><span>Forecasting</span><span>Dashboards</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>Data Engineering</span><span>2024</span></div>
+                <h3>Data Quality Monitoring Framework</h3>
+                <p>Monitoring and evaluation framework for checking dataset reliability, model performance, and production data drift.</p>
+                <p class="project-impact">Improved operational visibility for machine learning systems that depended on multi-source analytical datasets.</p>
+                <div class="tag-list"><span>Python</span><span>SQL</span><span>ETL</span><span>Validation</span><span>Monitoring</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>NLP</span><span>2023</span></div>
+                <h3>NER Information Extraction Pipeline</h3>
+                <p>Named entity recognition pipeline that converts unstructured content into structured features for downstream analytics.</p>
+                <p class="project-impact">Made document-heavy workflows easier to search, classify, and model with repeatable NLP feature generation.</p>
+                <div class="tag-list"><span>spaCy</span><span>Python</span><span>NER</span><span>Feature Engineering</span><span>NLP</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>Statistics</span><span>2025</span></div>
+                <h3>Experimentation and Model Evaluation Lab</h3>
+                <p>Reusable analysis workspace for hypothesis testing, A/B testing, model validation, and performance comparison.</p>
+                <p class="project-impact">Connects statistical rigor with applied ML decisions by making experiment outcomes easier to audit and explain.</p>
+                <div class="tag-list"><span>R</span><span>Python</span><span>A/B Testing</span><span>Statistical Inference</span><span>Scikit-Learn</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>RAG Evaluation</span><span>2026</span></div>
+                <h3>Semantic Retrieval Evaluation Suite</h3>
+                <p>Evaluation pipeline for retrieval relevance, answer accuracy, and agent reliability across semantic search workflows.</p>
+                <p class="project-impact">Supports better RAG system quality by tracking retrieval behavior before it reaches user-facing automation.</p>
+                <div class="tag-list"><span>Vector Search</span><span>W&amp;B Weave</span><span>Redis</span><span>Prompt Engineering</span><span>LLMs</span></div>
+              </article>
+
+              <article class="project-card">
+                <div class="project-meta"><span>Business Analysis</span><span>2021</span></div>
+                <h3>Cost Optimization Analytics Dashboard</h3>
+                <p>Recurring KPI dashboard for analyzing expenses, productivity, revenue trends, and avoidable operational costs.</p>
+                <p class="project-impact">Surfaced cost-saving opportunities and gave business teams a clearer view of performance levers.</p>
+                <div class="tag-list"><span>SQL</span><span>Dashboards</span><span>EDA</span><span>KPI Reporting</span><span>Forecasting</span></div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="contact-band" id="contact">
+        <div class="section-shell contact-grid">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2>Contact</h2>
+          </div>
+          <div class="contact-links">
+            <a href="mailto:asachar@horizon.csueastbay.edu">asachar@horizon.csueastbay.edu</a>
+            <a href="https://linkedin.com/in/akhil-sachar" target="_blank" rel="noreferrer">linkedin.com/in/akhil-sachar</a>
+            <a href="https://github.com/akhil-sachar" target="_blank" rel="noreferrer">github.com/akhil-sachar</a>
+            <span>San Francisco, CA</span>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
